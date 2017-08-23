@@ -1,13 +1,35 @@
 # Project-Logs-Analysis
-Project logs analysis uses a given database called news to generate reports.  This python application can generate the following reports:
+Project logs analysis is a python application to generate reports based on information from database *news*.
+
+Databse news is a PostgreSQL database for a fictional news website. news database has three tables:
+articles, authors, and log.  Table articles contains information of newspaper articles like article author title and so on.  Table authors has information related to news authors, such as author's name. Table log has a database row for each time a reader loaded a web page.
+
+When running the python application, following reports will be generated:
 * the top three most viewed articles
 * authors and their articles' total views, author with most views first
 * days where above 1% of requests leading to errors
 
 ## Running Environment
-Python 2.7
+Python: 3.5
+PostgreSQL: 9.5.8
+psycopg2: 2.7.3
+
 
 ## Run the application
+
+Firstly, set up database news
+1. create databse news
+This python application is running in Vagrant virtual machine.  Download Vagrantfile, and creating news database will be automated by `Vagrantfile`.
+
+2. download newsdata.sql
+Download newsdata.zip, and unzip this file after downloading it.  The file inside is called `newsdata.sql`, and newsdata.sql should be put into the same file as Vagrantfile.
+
+3. import the schema and data from newsdb.sql into news database
+use command `psql -d news -f newsdata.sql`
+
+After finishing above steps, SQL views below need to be created.
+  
+
 First, connect to the database news via terminal through command line `psql news`, and then create the following SQL views and table:
 
 A SQL view article_path_views
@@ -17,17 +39,9 @@ create view article_path_views as
       from log
      where status = '200 OK'
      group by path
-     order by views desc
-    offset 1;
+     order by views desc;
 ```
 
-A SQL table article_views
-```
-create table article_views(
-    slug text,
-   views integer
-);
-```
 
 A SQL view daily_errorreq_totalreq:
 ```
@@ -43,13 +57,6 @@ create view daily_errorreq_totalreq as
   group by date(time);
 ```
 
-A SQL view daily_error_rate
-```
-create view daily_error_rate as
-    select date, 
-           cast(error_req as numeric) / total_req as error_rate
-      from daily_errorreq_totalreq;
-```
 
 After setting up SQL views and table, run the application via command line `python newsdb.py`.  When the application finishes running, three reports will be printed out.
 
