@@ -10,24 +10,24 @@ When running the python application, following reports will be generated:
 * days where above 1% of requests leading to errors
 
 ## Running Environment
-Python: 3.5
-PostgreSQL: 9.5.8
-psycopg2: 2.7.3
+Python: 3.5  
+PostgreSQL: 9.5.8  
+psycopg: psycopg2 2.7.3   
 
 
 ## Run the application
 
 Firstly, set up database news
-1. create databse news
+1. Create databse news  
 This python application is running in Vagrant virtual machine.  Download Vagrantfile, and creating news database will be automated by `Vagrantfile`.
 
-2. download newsdata.sql
-Download newsdata.zip, and unzip this file after downloading it.  The file inside is called `newsdata.sql`, and newsdata.sql should be put into the same file as Vagrantfile.
+2. Download newsdata.sql  
+Download newsdata.zip, and unzip this file after downloading it.  The file inside is called `newsdata.sql`, and `newsdata.sql` should be put into the same file as Vagrantfile.
 
-3. import the schema and data from newsdb.sql into news database
-use command `psql -d news -f newsdata.sql`
+3. Import the schema and data from newsdb.sql into news database  
+Use command `psql -d news -f newsdata.sql`
 
-After finishing above steps, SQL views below need to be created.
+Secondly, create SQL views
   
 
 First, connect to the database news via terminal through command line `psql news`, and then create the following SQL views and table:
