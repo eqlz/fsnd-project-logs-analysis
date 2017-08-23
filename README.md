@@ -2,7 +2,7 @@
 Project logs analysis is a python application to generate reports based on information from database *news*.
 
 Databse news is a PostgreSQL database for a fictional news website. news database has three tables:
-articles, authors, and log.  Table articles contains information of newspaper articles like article author title and so on.  Table authors has information related to news authors, such as author's name. Table log has a database row for each time a reader loaded a web page.
+articles, authors, and log.  Table articles contains information of newspaper articles like article author, title and so on.  Table authors has information related to news authors, such as author's name. Table log has a database row for each time a reader loaded a web page.
 
 When running the python application, following reports will be generated:
 * the top three most viewed articles
@@ -27,7 +27,7 @@ Download newsdata.zip, and unzip this file after downloading it.  The file insid
 3. import the schema and data from newsdb.sql into news database
 use command `psql -d news -f newsdata.sql`
 
-After finishing above steps, SQL views below need to be created.
+After finishing above steps, SQL views below need to be created.u
   
 
 First, connect to the database news via terminal through command line `psql news`, and then create the following SQL views and table:
